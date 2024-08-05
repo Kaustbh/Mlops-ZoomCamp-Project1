@@ -1,0 +1,29 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.1
+mlflow_version: 2.14.3
+model_size_bytes: 763
+model_uuid: 1513c19d8bfd4a43bdc81149f3903fba
+run_id: d82f6af9dac14180ad78392aefa75cd6
+signature:
+  inputs: '[{"type": "long", "name": "Sex", "required": true}, {"type": "double",
+    "name": "Length", "required": true}, {"type": "double", "name": "Diameter", "required":
+    true}, {"type": "double", "name": "Height", "required": true}, {"type": "double",
+    "name": "Weight", "required": true}, {"type": "double", "name": "Shucked Weight",
+    "required": true}, {"type": "double", "name": "Viscera Weight", "required": true},
+    {"type": "double", "name": "Shell Weight", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2024-07-21 05:18:34.879605'
