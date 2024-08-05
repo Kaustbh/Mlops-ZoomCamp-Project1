@@ -1,0 +1,15 @@
+{
+  "id": "9db7936a-6fb2-40aa-92a4-29b1cc91502b",
+  "name": "Crab Age Prediction Project",
+  "description": "My project description",
+  "dashboard": {
+    "name": "Crab Age Prediction Project",
+    "panels": [],
+    "tabs": [],
+    "tab_id_to_panel_ids": {}
+  },
+  "team_id": null,
+  "date_from": null,
+  "date_to": null,
+  "created_at": "2024-08-04T20:16:15.544333"
+}
