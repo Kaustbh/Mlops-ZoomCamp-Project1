@@ -24,6 +24,17 @@ prefect:
 run-training-pipeline:
 	pipenv run python pipeline/training_pipeline.py
 
+web-service:
+	@echo "Creating docker container for model deployment (as web service)"
+	pipenv run docker build -f ./deployment/Dockerfile -t crab-age-prediction-service:v1
+	@echo "Open a new terminal and run"
+	@echo "cd web-service"
+	@echo "docker run -it --rm -p 5010:5010 crab-age-prediction-service:v1"
+	@echo "Open a new terminal and run"
+	@echo "python test.py"
+	@echo "To stop all running docker containers run"
+	@echo "docker stop $(docker ps -a -q)"
+
 quality-check:
 	pipenv run isort .
 	pipenv run black .
