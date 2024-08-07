@@ -5,11 +5,11 @@ For [model deployment](./deployment), the ML model has been deployed as a Flask 
 1. Firstly we run the Docker container which has the Flask app `./deployment/app.py` to launch the Flask Web service inside Docker. 
 
 <p align="center">
-  <img src="../docs/deploy_terminal.png" alt="Run Docker container">
+  <img src="../docs/deploy_terminal2.png" alt="Run Docker container">
 </p>
 
 2. We finally run the `./deployment/test.py` testing script which sends a POST request, including the features, to the Flask Web service in the container, and then receives back a crab age prediction.
 
 <p align="center">
-  <img src="../docs/deploy_terminal2.png" alt="Test Docker container">
+  <img src="../docs/deploy_terminal.png" alt="Test Docker container">
 </p> 
