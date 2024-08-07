@@ -1,0 +1,9 @@
+dataset_folder_path: ./data/
+
+target_variable: Age
+dataset_path: /home/kaustubh/mlops_zoomcamp/final_project/project_1/data/extended_crab_age_pred.csv
+train_path: /home/kaustubh/mlops_zoomcamp/final_project/project_1/data/processed/train.parquet
+valid_path: /home/kaustubh/mlops_zoomcamp/final_project/project_1/data/processed/valid.parquet
+test_path: /home/kaustubh/mlops_zoomcamp/final_project/project_1/data/processed/test.parquet
+
+trials: 4
