@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+scikit-learn = "*"
+seaborn = "*"
+matplotlib = "*"
+mlflow = "*"
+setuptools = "*"
+prefect = "*"
+kaggle = "*"
+xgboost = "*"
+optuna = "*"
+hyperopt = "*"
+evidently = "*"
+psycopg2 = "*"
+psycopg = "*"
+pytest = "*"
+isort = "*"
+black = "*"
+pylint = "*"
+
+[dev-packages]
+ipykernel = "*"
+
+[requires]
+python_version = "3.12"
