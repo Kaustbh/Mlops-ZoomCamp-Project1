@@ -1,4 +1,4 @@
-For [model deployment](./deployment), the ML model has been deployed as a Flask Web service and then deployed into a Docker container for production.
+For [model deployment](./), the ML model has been deployed as a Flask Web service and then deployed into a Docker container for production.
 
 ## In this folder we have 4 python files `model_loader.py` and `model_service.py` for loading the model and for making predictions, `app.py` and `test.py` for Flask Web Service and for sending POST requests.
 
