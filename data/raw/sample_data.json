@@ -1,0 +1,32 @@
+[
+    {
+        "Sex": "M",
+        "Length": 1.5750,
+        "Diameter": 1.2250,
+        "Height": 0.3750,
+        "Weight": 31.226974	,
+        "Shucked Weight": 12.303683,
+        "Viscera Weight": 6.321938,
+        "Shell Weight": 9.638830
+    },
+    {
+        "Sex": "I",
+        "Length": 1.2375,
+        "Diameter": 1.0000,
+        "Height": 0.3750,
+        "Weight": 21.885814	,
+        "Shucked Weight": 7.654365,
+        "Viscera Weight": 3.798833,
+        "Shell Weight": 7.654365
+    },
+    {
+        "Sex": "F",
+        "Length": 1.4500,
+        "Diameter": 1.1625,
+        "Height": 0.4125,
+        "Weight": 28.250277	,
+        "Shucked Weight": 11.127179,
+        "Viscera Weight": 7.016501,
+        "Shell Weight": 7.257472
+    }
+]
