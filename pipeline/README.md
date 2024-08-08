@@ -14,12 +14,12 @@ For loading the data, the data can be loaded from the local. Loading the data fr
 #### Experiment Tracking example
 <br>
 
-![Experiment Tracking](../docs/mlflow_exp_tracking.png)
+![Experiment Tracking](../images/mlflow_exp_tracking.png)
 
 #### Model Registry example
 <br>
 
-![Model Registry](../docs/mlflow_model_registry.png)
+![Model Registry](../images/mlflow_model_registry.png)
 
 
 **Warning:** If you choose to use the data loading with s3 and if you don't set the environment variables associated with aws credentials, you will get the error. For loading data from local, there is no need to set the environment variables.
@@ -31,4 +31,4 @@ This training workflow can be deployed with the **prefect** service. With prefec
 #### Prefect Workflow for training pipeline example
 <br>
 
-![Prefect Workflow for training pipeline](../docs/prefect_train.png)
+![Prefect Workflow for training pipeline](../images/prefect_train.png)

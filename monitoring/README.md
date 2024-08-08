@@ -13,11 +13,11 @@ All services from above will be run from docker compose.
 
 #### Adminer tool
 
-![Adminer tool](../docs/adminer.png)
+![Adminer tool](../images/adminer.png)
 
 #### Prediction log inside the database
 
-![Prediction log](../docs/database.png)
+![Prediction log](../images/database.png)
 
 ## Evidently Dashboard
 
@@ -26,9 +26,9 @@ The report about data drift and target drift can be checked from **evidently das
 #### Evidently dashboard
 <br>
 
-![Data drift dashboard](../docs/data_drift.png)<br>
+![Data drift dashboard](../images/data_drift.png)<br>
 
-![Data Distribution dashboard](../docs/data_distribution.png)
+![Data Distribution dashboard](../images/data_distribution.png)
 
 ## Monitoring Pipeline
 
@@ -38,4 +38,4 @@ The **monitoring pipeline** can be deployed as a workflow by using **prefect**. 
 #### Monitoring Pipeline with prefect Example
 <br>
 
-![Monitoring pipeline](../docs/prefect_monitor.png)
+![Monitoring pipeline](../images/prefect_monitor.png)
