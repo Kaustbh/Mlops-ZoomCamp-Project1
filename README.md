@@ -27,12 +27,22 @@ The main focus of the project is to apply the MLops principles like experiment t
 
 This model tries to predict the Crab Age (column "Age") for this data set.
 
-The Entire Project can be runned using Makefile
+<p style="font-size:24px; color:red;"><strong>The Entire Project can be run using the Makefile</strong></p>
 
 ### Installing of make and git
 ```
 sudo pacman -S make git
 ```
+
+### Cloning the git repository.
+
+Clone the repository.
+```shell
+git clone https://github.com/Kaustbh/Mlops-ZoomCamp-Project1.git
+```
+Go to the root directory by ```cd Mlops-ZoomCamp-Project1```.
+
+
 ### Installing of docker and docker compose
 Since this project uses a lot of dockerized services, docker and docker compose are needed to be installed.
 
@@ -46,12 +56,11 @@ prerequisites:
 	python3 -m pip install --upgrade pip
 	pip install --upgrade pipenv
 	pipenv install --python 3.11
-	pipenv run python ./scripts/unzipZipRaw.py
+	pipenv run python ./ingestion/unzipZipRaw.py
 ```
-The step "Installing dependencies from Pipfile.lock" needs some time.
-That provide the virtual environment **.venv** in project folder. This commands also unzips the data from zip file stored in ```data/``` folder.
+The step creates virtual environment using pipenv and install all the required packages present in the **Pipfile.lock** file.
+It also unzips the data from zip file stored in ```data/``` folder.
 
-I recommend to run steps as it's described in Makefile.
 
 ## 2. Start MLFlow UI
 To start MLFlow UI open new terminal and run **make mlflow**
@@ -66,7 +75,6 @@ You can access the initialized GUI at http://127.0.0.1:5000.
 ![](/images/mlflow-initialGUI.png)
 
 
-
 ## 3. Start Prefect server
 To start Prefect server open new terminal and run **make prefect**
 ```
@@ -77,46 +85,26 @@ prefect:
 You can access the initialized GUI at http://127.0.0.1:4200.
 
 ![](/images/prefect-initialGUI.png)
-<!---
-## 4. Workflow orchestration
-Now everything is ready to start the orchestration workflow. Run **make deploy** in a new terminal window.
-```
-deploy: ./data/raw/housing-prices-35.csv
-	@echo "Starting workflow deployment with Prefect"
-	# if error: Work pool named 'zoompool' already exists. 
-	# Please try creating your work pool again with a different name.
-	# uncomment next line
-	#pipenv run prefect work-pool delete 'zoompool'
-	pipenv run prefect work-pool create --type process zoompool
-	pipenv run prefect --no-prompt deploy --all
-	pipenv run prefect worker start -p zoompool
-```
-With that everything is prepared. You only need to go to [Prefect website](http://127.0.0.1:4200/deployments) and hit "Quick run"
 
-![](/images/prefect-quickRun.png)
+## 4. Workflow orchestration
+Now everything is ready to start the orchestration workflow. Run **make run-training-pipeline** in a new terminal window.
+```
+run-training-pipeline:
+	@echo "Start Training"
+	pipenv run python pipeline/training_pipeline.py
+```
 
 Running the flows (and sub flows) and tasks can take some time.
 This workflow includes a whole bunch of steps. 
-First the datasets are provided. You can find all of them in the data/processed folder. After that there is a preparation step. For the training I have chosen the columns "area_living", "area_land", "n_rooms", "price", and "year". I extracted the "year" information from the "date" column.
-This specific features are used in the training step.
-You can find the run on MLFlow website. The model is now registered and I also promoted it to Staging stage automatically.
 
-![](/images/mlflow-Run.png)
+First the datasets are provided. You can find all of them in the data/processed folder. After that I performed **Preprocessing** and **Normalization** on the dataset then applied **RandomForestRegressor** to the dataset.
 
-After that a test is triggered. For this purpose I decided to transition that model to Production. This decision can make no sense in production environment but I wanted to see this transition in action.
-
-![](/images/mlflow-prodModel.png)
-
-As the last step there is a prediction. For that purpose I used a different dataset. The dataset has almost 4.000 rows and for the prediction a randomly choosen row is used. You can find the predicted price in the terminal.
+You can find the run on MLFlow website. The model is now registered and I also promoted it to Production stage automatically.
 
 All of this mentioned steps are shown in the Prefect GUI after the main flow has finished.
 
-![](/images/prefect-FlowCompleted.png)
-
-For the training and the test an automatically created HTML report is stored in the evidently folder.
-
-![](/images/report.png)
-
+You want to know more about training pipeline, take a look at [this readme](./pipeline/README.md)
+<!---
 ## 5. Monitoring with Evidently and Grafana
 This step shows Evidently and Grafana in action. It is dockerized (have a look at monitoring/docker-compose.yaml). To start this step open new terminal and run **make monitoring**. Run this make command in root directory.
 ```
