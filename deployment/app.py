@@ -1,9 +1,8 @@
 import os
 import logging
-
 from flask import Flask, jsonify, request
-from model_loader import ModelLoader
-from model_service import ModelService
+from .model_loader import ModelLoader
+from .model_service import ModelService
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
