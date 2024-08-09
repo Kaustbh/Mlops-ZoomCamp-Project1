@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error
 
-data_path = "/home/kaustubh/mlops_zoomcamp/final_project/project_1/data/processed"
+data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'processed')
+# data_path = "/home/kaustubh/mlops_zoomcamp/final_project/project_1/data/processed"
 
 
 def read_testdata():
@@ -14,9 +15,10 @@ def read_testdata():
 
     data = pd.read_parquet(path)
 
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'preprocessor', 'preprocessor.b')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/preprocessor/preprocessor.b",
-        "rb",
+        model_relative_path, "rb"
     ) as f:
         preprocessor = pickle.load(f)
 
@@ -33,8 +35,10 @@ def read_testdata():
 def test_model_loading():
     # Test if the model loads correctly
 
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/models/model.pkl", "rb"
+        model_relative_path, "rb"
     ) as f:
         rf_model = pickle.load(f)
 
@@ -43,10 +47,13 @@ def test_model_loading():
 
 def test_predictAccuracy():
     # testinng accuracy if it will be accpted or not
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/models/model.pkl", "rb"
+        model_relative_path, "rb"
     ) as f:
         rf_model = pickle.load(f)
+
     features_xval, features_yval = read_testdata()
     actual_prediction = rf_model.predict(features_xval)
     mse = mean_squared_error(features_yval, actual_prediction)
@@ -58,8 +65,11 @@ def test_predictAccuracy():
 
 def test_predict_shape():
     # Test if the prediction shape matches the input shape
+
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/models/model.pkl", "rb"
+        model_relative_path, "rb"
     ) as f:
         rf_model = pickle.load(f)
 
@@ -72,8 +82,10 @@ def test_predict_shape():
 
 def test_empty_input():
     # Test how the model handles an empty input
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/models/model.pkl", "rb"
+        model_relative_path, "rb"
     ) as f:
         rf_model = pickle.load(f)
     try:
@@ -85,8 +97,10 @@ def test_empty_input():
 
 def test_consistent_predictions():
     # Test if the model gives consistent predictions for the same input
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/models/model.pkl", "rb"
+        model_relative_path, "rb"
     ) as f:
         rf_model = pickle.load(f)
 
@@ -100,8 +114,10 @@ def test_consistent_predictions():
 
 def test_predict():
     # testing the first row prediction is correct
+    model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+
     with open(
-        "/home/kaustubh/mlops_zoomcamp/final_project/project_1/models/model.pkl", "rb"
+        model_relative_path, "rb"
     ) as f:
         rf_model = pickle.load(f)
 
