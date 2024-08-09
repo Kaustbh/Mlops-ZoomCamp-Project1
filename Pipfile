@@ -23,8 +23,7 @@ pytest = "*"
 isort = "*"
 black = "*"
 pylint = "*"
+pre-commit = "*"
 
 [dev-packages]
 ipykernel = "*"
-
-
