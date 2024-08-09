@@ -103,64 +103,79 @@ You can find the run on MLFlow website. The model is now registered and I also p
 
 All of this mentioned steps are shown in the Prefect GUI after the main flow has finished.
 
-You want to know more about training pipeline, take a look at [this readme](./pipeline/README.md)
-<!---
+You want to know more about training pipeline, take a look at [README](./pipeline/README.md)
+
 ## 5. Monitoring with Evidently and Grafana
-This step shows Evidently and Grafana in action. It is dockerized (have a look at monitoring/docker-compose.yaml). To start this step open new terminal and run **make monitoring**. Run this make command in root directory.
+This step shows Evidently and Grafana in action. It is dockerized (have a look at docker-compose.yaml). To start this step open new terminal and run **make monitoring**. Run this make command in root directory.
 ```
 monitoring:
 	@echo "Starting monitoring with Evidently and Grafana dashboards"
-	pipenv run docker-compose -f ./monitoring/docker-compose.yaml up --build
+	pipenv run docker-compose -f docker-compose.yaml up --build
 	@echo "Open a new terminal and run"
 	@echo "cd monitoring"
-	@echo "python evidently_metrics_calculation.py"
+	@echo "python evidently_metrics_calculations.py"
 ```
-This provides 3 running docker containers for you (database, [Grafana](http://localhost:3000/), and [Adminer](http://localhost:8080/)). The user credentials for Grafana are admin:admin.
+This provides 3 running docker containers for you (database, [Grafana](http://localhost:3000/), and [Adminer](http://localhost:8081/)). The user credentials for Grafana are **admin:admin**.
 Then you have to open new terminal and change directory to the monitoring folder and run **python evidently_metrics_calculation.py** manually.
-A process is triggered to simulate production usage of the model. For that purpose some metrics are calculated for 9 runs (3 for each of 3 different data sets). On Grafana website you can find a prepared dashboard "Housing Prices Prediction Dashboard". After finishing you can see the results.
 
-![](/images/grafana-db.png)
-
-I implemented also simple alerting to raise an error when one specific value is higher than expected.  
-
-![](/images/grafana-alerting.png)
+The ML model monitoring proceeses and dashboard are fully explained and demonstrated in the [README](monitoring/README.md) file
 
 
 ## 6. Model deployment as simple web service
-This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the web-service folder). The image building process can be triggered by running **make web-service**.
+This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the web-service folder). The image building process can be triggered by running **make deployment**.
 ```
-web-service:
+deployment:
 	@echo "Creating docker container for model deployment (as web service)"
-	pipenv run docker build -f ./web-service/Dockerfile -t housing-price-prediction-service:v1
+	pipenv run docker build -f ./deployment/Dockerfile -t crab-age-prediction-service:v1
 	@echo "Open a new terminal and run"
-	@echo "cd web-service"
-	@echo "docker run -it --rm -p 9696:9696 housing-price-prediction-service:v1"
+	@echo "cd deployment"
+	@echo "docker run -it --rm -p 5010:5010 crab-age-prediction-service:v1"
 	@echo "Open a new terminal and run"
 	@echo "python test.py"
 	@echo "To stop all running docker containers run"
 	@echo "docker stop $(docker ps -a -q)"
 ```
-Then you have to change directory to the web-service folder. By running **docker run -it --rm -p 9696:9696 housing-price-prediction-service:v1** the docker container is started. The web service is listening at http://0.0.0.0:9696. 
+Then you have to change directory to the deployment folder. By running **docker run -it --rm -p 5010:5010 crag-age-prediction-service:v1** the docker container is started. The web service is listening at http://0.0.0.0:5010. 
 Open a new terminal (in the web-service folder) and run **python test.py**. This triggers a request to get a prediction for one specific example. This triggers one request and outputs the result of the prediction to the terminal.
 
-## 7. Cleaning
-To clean everything open new terminal and run **make clean**
+## 7. Testing
+
+### 1. Check the unit test.
+
+- You can run unit test by `make run-unit-test`.
+
+### 2. Check the quality of the code by linting tools.
+
+- You can run by `make quality-check`.
+
+## 8. CICD (Github Actions)
+
+I also implemented pre-commit hooks (see .pre-commit-config.yaml) and I added ci-tests (see .github/workflows/ci.yaml).
+
+For running the hooks present in **pre-commit-config.yaml** you need to first install the pre-commit, for that just run ``` make install-hooks```
+
+The CICD (GitHub Actions) workflow is fully explained and demonstrated in the [workflows README](.github/workflows/README.md) file.
+
+
+## 9. Cleaning
+To stop and clean everything open new terminal and run
+
+You have already set up the mlops-pipeline. You can stop the services ```make stop-all-services```
+
+```
+stop-all-services:
+	docker compose down 
+```
+ ```make clean```
 ```
 clean:
 	@echo "Cleaning"
 	rm -rf __pycache__
 	rm -rf data/processed
-	rm -rf data/raw/housing-prices-35.csv
+	rm -rf data/extended_crab_age_pred.csv
 	rm -rf evidently
 	rm -rf mlruns
 	rm -rf mlflow.db
 	pipenv --rm
 ```
 This also removes the virtual environment in the project folder **.venv**
-
-
-## Reproducibility
-Following each step in the mentioned order should make it easy to reproduce the same results like me.
-
-## Best Practices
-There are unit tests implemented and I used black, isort and pylint as linter and code formatters (have a look at pyproject.toml). I used a Makefile for the most important steps. This order should guide you through the project. I also implemented pre-commit hooks (see .pre-commit-config.yaml) and I added ci-tests (see .github/workflows/ci-tests.yml). -->
