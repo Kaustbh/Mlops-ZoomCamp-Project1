@@ -4,6 +4,8 @@
 ## Problem description
 The used dataset is from [Kaggle](https://www.kaggle.com/datasets/shalfey/extended-crab-age-prediction/data). The dataset is used to estimate the age of the crab based on the physical attributes.
 
+For a commercial crab farmer knowing the right age of the crab helps them decide if and when to harvest the crabs. Beyond a certain age, there is negligible growth in crab's physical characteristics and hence, it is important to time the harvesting to reduce cost and increase profit. 
+
 There are 10 columns:
 
 <div align="center">
@@ -22,6 +24,7 @@ There are 10 columns:
 |Age     |  Age of the Crab (in months) |
 
 </div>
+
 
 The main focus of the project is to apply the MLops principles like **experiment tracking**, **training pipeline**, **model monitoring** concepts to the machine learning projects rather than getting state-of-the-art accuracy.
 
