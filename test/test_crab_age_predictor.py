@@ -6,7 +6,6 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error
 
 data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'processed')
-# data_path = "/home/kaustubh/mlops_zoomcamp/final_project/project_1/data/processed"
 
 
 def read_testdata():
@@ -94,33 +93,40 @@ def test_empty_input():
     except ValueError:
         pass  # Expected behavior
 
+def test_predictability_with_outliers():
+    # Test model's predictability with extreme values
 
-# def test_consistent_predictions():
-#     # Test if the model gives consistent predictions for the same input
-#     model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+    model_relative_path = os.path.join(
+        os.path.dirname(__file__), '..', 'models', 'model.pkl'
+    )
 
-#     with open(
-#         model_relative_path, "rb"
-#     ) as f:
-#         rf_model = pickle.load(f)
+    with open(model_relative_path, "rb") as f:
+        rf_model = pickle.load(f)
 
-#     features_xval, _ = read_testdata()
-#     prediction_1 = rf_model.predict(features_xval)
-#     prediction_2 = rf_model.predict(features_xval)
-#     assert np.array_equal(
-#         prediction_1, prediction_2
-#     ), "Model predictions are inconsistent"
+    # Create a dataset with extreme values
+    features_xval, _ = read_testdata()
+    features_xval.loc[0, "Length"] = 1000  # Set an extreme value
 
+    try:
+        rf_model.predict(features_xval)
+    except Exception as e:
+        assert False, f"Model failed with extreme input: {e}"
 
-# def test_predict():
-#     # testing the first row prediction is correct
-#     model_relative_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'model.pkl')
+def test_unexpected_labels():
+    # Test how the preprocessor and model handle unexpected labels in 'Sex' column
 
-#     with open(
-#         model_relative_path, "rb"
-#     ) as f:
-#         rf_model = pickle.load(f)
+    model_relative_path = os.path.join(
+        os.path.dirname(__file__), '..', 'models', 'model.pkl'
+    )
 
-#     features_xval, features_yval = read_testdata()
-#     actual_prediction = rf_model.predict(np.array([features_xval.iloc[0]]))
-#     assert actual_prediction == features_yval.iloc[0]
+    with open(model_relative_path, "rb") as f:
+        rf_model = pickle.load(f)
+
+    features_xval, _ = read_testdata()
+    features_xval.loc[0, "Sex"] = 'M' # Set an unexpected label
+
+    try:
+        rf_model.predict(features_xval)
+        assert False, "Model should raise an exception for input with unexpected label"
+    except ValueError:
+        pass  # Expected behavior

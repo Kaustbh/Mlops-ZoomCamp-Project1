@@ -1,10 +1,9 @@
 # MLOps for Crab Age Prediction 
-|![](/images/house.jpg)|
-|:--:| 
-|*[Image from https://pixabay.com](https://pixabay.com/de/photos/geld-heimat-m%C3%BCnze-anlage-gesch%C3%A4ft-2724235/)*|
+![](/images/crab.jpg)
 
 ## Problem description
-The used dataset is from [Kaggle](https://www.kaggle.com/datasets/shalfey/extended-crab-age-prediction/data). The dataset is used to estimate the age of the crab based on the physical attributes
+The used dataset is from [Kaggle](https://www.kaggle.com/datasets/shalfey/extended-crab-age-prediction/data). The dataset is used to estimate the age of the crab based on the physical attributes.
+
 There are 10 columns:
 
 <div align="center">
@@ -23,11 +22,12 @@ There are 10 columns:
 |Age     |  Age of the Crab (in months) |
 
 </div>
+
 The main focus of the project is to apply the MLops principles like **experiment tracking**, **training pipeline**, **model monitoring** concepts to the machine learning projects rather than getting state-of-the-art accuracy.
 
 This model tries to predict the Crab Age (column "Age") for this data set.
 
-<p style="font-size:28px; color:red;"><strong>The Entire Project can be run using the Makefile</strong></p>
+## ![completed](https://via.placeholder.com/15/00ff00/000000?text=+) The Entire Project can be run using the Makefile
 
 
 ### Installing of make and git
