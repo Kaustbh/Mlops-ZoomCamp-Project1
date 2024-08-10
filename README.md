@@ -1,5 +1,5 @@
 # MLOps for Crab Age Prediction 
-![](/images/crab.jpg)
+![](/images/crab.png)
 
 ## Problem description
 The used dataset is from [Kaggle](https://www.kaggle.com/datasets/shalfey/extended-crab-age-prediction/data). The dataset is used to estimate the age of the crab based on the physical attributes.
