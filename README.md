@@ -54,7 +54,7 @@ You need to follow these steps about **Install using the apt repository** from [
 
 
 ## 1. Prerequisites
-To prepare the environment just run **make prerequisites**
+To prepare the environment just run ```make prerequisites```
 ```
 prerequisites:
 	@echo "Building Python environment and unzipping dataset"
@@ -69,7 +69,7 @@ It also unzips the data from zip file stored in ```data/``` folder.
 
 ## 2. Start MLFlow UI
 
-To start MLFlow UI open new terminal and run **make mlflow**
+To start MLFlow UI open new terminal and run ```make mlflow```
 ```
 mlflow:
 	@echo "Starting MLflow server..."
@@ -81,7 +81,7 @@ You can access the initialized GUI at http://127.0.0.1:5000.
 
 ## 3. Start Prefect server
 
-To start Prefect server open new terminal and run **make prefect**
+To start Prefect server open new terminal and run ```make prefect```
 ```
 prefect:
 	@echo "Starting Prefect server"
@@ -92,7 +92,7 @@ You can access the initialized GUI at http://127.0.0.1:4200.
 
 ## 4. Workflow orchestration
 
-Now everything is ready to start the orchestration workflow. Run **make run-training-pipeline** in a new terminal window.
+Now everything is ready to start the orchestration workflow. Run ```make run-training-pipeline``` in a new terminal window.
 ```
 run-training-pipeline:
 	@echo "Start Training"
@@ -113,7 +113,7 @@ You want to know more about training pipeline, take a look at [README](./pipelin
 
 ## 5. Monitoring with Evidently and Grafana
 
-This step shows Evidently and Grafana in action. It is dockerized (have a look at docker-compose.yaml). To start this step open new terminal and run **make monitoring**. Run this make command in root directory.
+This step shows Evidently and Grafana in action. It is dockerized (have a look at docker-compose.yaml). To start this step open new terminal and run ```make monitoring```. Run this make command in root directory.
 ```
 monitoring:
 	@echo "Starting monitoring with Evidently and Grafana dashboards"
@@ -123,14 +123,14 @@ monitoring:
 	@echo "python evidently_metrics_calculations.py"
 ```
 This provides 3 running docker containers for you (database, [Grafana](http://localhost:3000/), and [Adminer](http://localhost:8081/)). The user credentials for Grafana are **admin:admin**.
-Then you have to open new terminal and change directory to the monitoring folder and run **python evidently_metrics_calculation.py** manually.
+Then you have to open new terminal and change directory to the monitoring folder and run ```python evidently_metrics_calculation.py``` manually.
 
 The ML model monitoring proceeses and dashboard are fully explained and demonstrated in the [README](monitoring/README.md) file
 
 
 ## 6. Model deployment as simple web service
 
-This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the deployment folder). The image building process can be triggered by running **make deployment**.
+This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the deployment folder). The image building process can be triggered by running ```make deployment```.
 ```
 deployment:
 	@echo "Creating docker container for model deployment (as web service)"
@@ -144,7 +144,7 @@ deployment:
 	@echo "docker stop $(docker ps -a -q)"
 ```
 Then you have to change directory to the deployment folder. By running **docker run -it --rm -p 5010:5010 crag-age-prediction-service:v1** the docker container is started. The web service is listening at http://0.0.0.0:5010. 
-Open a new terminal (in the web-service folder) and run **python test.py**. This triggers a request to get a prediction for one specific example. This triggers one request and outputs the result of the prediction to the terminal.
+Open a new terminal (in the deployment folder) and run ```python test.py```. This triggers a request to get a prediction for one specific example. This triggers one request and outputs the result of the prediction to the terminal.
 
 
 ## 7. Testing
