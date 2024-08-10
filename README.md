@@ -72,7 +72,7 @@ It also unzips the data from zip file stored in ```data/``` folder.
 
 ## 2. Start MLFlow UI
 
-To start MLFlow UI open new terminal and run ```make mlflow```
+To start MLFlow UI open new terminal and run ```make mlflow``` (change the database path according to your setup)
 ```
 mlflow:
 	@echo "Starting MLflow server..."
@@ -133,7 +133,7 @@ The ML model monitoring proceeses and dashboard are fully explained and demonstr
 
 ## 6. Model deployment as simple web service
 
-This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the deployment folder). The image building process can be triggered by running ```make deployment```.
+This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the deployment folder). The image building process can be triggered by running ```make deployment```
 ```
 deployment:
 	@echo "Creating docker container for model deployment (as web service)"
@@ -154,11 +154,11 @@ Open a new terminal (in the deployment folder) and run ```python test.py```. Thi
 
 ### 1. Check the unit test.
 
-- You can run unit test by `make run-unit-test`.
+- You can run unit test by `make run-unit-test`
 
 ### 2. Check the quality of the code by linting tools.
 
-- You can run by `make quality-check`.
+- You can run by `make quality-check`
 
 ## 8. CICD (Github Actions)
 
