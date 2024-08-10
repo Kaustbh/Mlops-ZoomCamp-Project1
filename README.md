@@ -11,28 +11,30 @@ There are 10 columns:
 
 | field | description |
 |------|------------| 
-| id  | used for Indexing |
+| id  | Used for Indexing |
 |Sex| Gender of the Crab - Male, Female and Indeterminate |
 |Length | Length of the Crab (in Feet; 1 foot = 30.48 cms) |
 |Diameter   |   Diameter of the Crab (in Feet; 1 foot = 30.48 cms) |
 |Height  |  Height of the Crab (in Feet; 1 foot = 30.48 cms) |
 |Weight |  Weight of the Crab (in ounces; 1 Pound = 16 ounces) |
 |Shucked Weight |  Weight without the shell (in ounces; 1 Pound = 16 ounces) |
-|Viscera Weight   |   is weight that wraps around your abdominal organs deep inside body (in ounces; 1 Pound = 16 ounces) |
+|Viscera Weight   |   Weight that wraps around your abdominal organs deep inside body (in ounces; 1 Pound = 16 ounces) |
 |Shell Weight |   Weight of the Shell (in ounces; 1 Pound = 16 ounces) |
 |Age     |  Age of the Crab (in months) |
 
 </div>
-The main focus of the project is to apply the MLops principles like experiment tracking, training pipeline, model monitoring concepts to the machine learning projects rather than getting state-of-the-art accuracy.
+The main focus of the project is to apply the MLops principles like **experiment tracking**, **training pipeline**, **model monitoring** concepts to the machine learning projects rather than getting state-of-the-art accuracy.
 
 This model tries to predict the Crab Age (column "Age") for this data set.
 
-<p style="font-size:24px; color:red;"><strong>The Entire Project can be run using the Makefile</strong></p>
+<p style="font-size:28px; color:red;"><strong>The Entire Project can be run using the Makefile</strong></p>
+
 
 ### Installing of make and git
 ```
 sudo pacman -S make git
 ```
+
 
 ### Cloning the git repository.
 
@@ -44,9 +46,12 @@ Go to the root directory by ```cd Mlops-ZoomCamp-Project1```.
 
 
 ### Installing of docker and docker compose
+
 Since this project uses a lot of dockerized services, docker and docker compose are needed to be installed.
 
 You need to follow these steps about **Install using the apt repository** from [here](https://docs.docker.com/engine/install/ubuntu/). You also need to install the post installation activity of docker from [here](https://docs.docker.com/engine/install/linux-postinstall/).
+
+
 
 ## 1. Prerequisites
 To prepare the environment just run **make prerequisites**
@@ -63,6 +68,7 @@ It also unzips the data from zip file stored in ```data/``` folder.
 
 
 ## 2. Start MLFlow UI
+
 To start MLFlow UI open new terminal and run **make mlflow**
 ```
 mlflow:
@@ -72,10 +78,9 @@ mlflow:
 ```
 You can access the initialized GUI at http://127.0.0.1:5000.
 
-![](/images/mlflow-initialGUI.png)
-
 
 ## 3. Start Prefect server
+
 To start Prefect server open new terminal and run **make prefect**
 ```
 prefect:
@@ -84,9 +89,9 @@ prefect:
 ```
 You can access the initialized GUI at http://127.0.0.1:4200.
 
-![](/images/prefect-initialGUI.png)
 
 ## 4. Workflow orchestration
+
 Now everything is ready to start the orchestration workflow. Run **make run-training-pipeline** in a new terminal window.
 ```
 run-training-pipeline:
@@ -97,15 +102,17 @@ run-training-pipeline:
 Running the flows (and sub flows) and tasks can take some time.
 This workflow includes a whole bunch of steps. 
 
-First the datasets are provided. You can find all of them in the data/processed folder. After that I performed **Preprocessing** and **Normalization** on the dataset then applied **RandomForestRegressor** to the dataset.
+First the datasets are provided. You can find all of them in the ```data/processed``` folder. After that I performed **Preprocessing** and **Normalization** on the dataset then applied **RandomForestRegressor** to the dataset.
 
-You can find the run on MLFlow website. The model is now registered and I also promoted it to Production stage automatically.
+You can find the run on MLFlow website. The model is now registered and I also promoted it to **Production** stage automatically.
 
 All of this mentioned steps are shown in the Prefect GUI after the main flow has finished.
 
 You want to know more about training pipeline, take a look at [README](./pipeline/README.md)
 
+
 ## 5. Monitoring with Evidently and Grafana
+
 This step shows Evidently and Grafana in action. It is dockerized (have a look at docker-compose.yaml). To start this step open new terminal and run **make monitoring**. Run this make command in root directory.
 ```
 monitoring:
@@ -122,7 +129,8 @@ The ML model monitoring proceeses and dashboard are fully explained and demonstr
 
 
 ## 6. Model deployment as simple web service
-This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the web-service folder). The image building process can be triggered by running **make deployment**.
+
+This step is about deploying the model as a web service. It is also dockerized (have a look at the Dockerfile in the deployment folder). The image building process can be triggered by running **make deployment**.
 ```
 deployment:
 	@echo "Creating docker container for model deployment (as web service)"
@@ -137,6 +145,7 @@ deployment:
 ```
 Then you have to change directory to the deployment folder. By running **docker run -it --rm -p 5010:5010 crag-age-prediction-service:v1** the docker container is started. The web service is listening at http://0.0.0.0:5010. 
 Open a new terminal (in the web-service folder) and run **python test.py**. This triggers a request to get a prediction for one specific example. This triggers one request and outputs the result of the prediction to the terminal.
+
 
 ## 7. Testing
 
@@ -158,6 +167,7 @@ The CICD (GitHub Actions) workflow is fully explained and demonstrated in the [w
 
 
 ## 9. Cleaning
+
 To stop and clean everything open new terminal and run
 
 You have already set up the mlops-pipeline. You can stop the services ```make stop-all-services```
@@ -179,3 +189,7 @@ clean:
 	pipenv --rm
 ```
 This also removes the virtual environment in the project folder **.venv**
+
+## Scoring
+
+For the scoring purpose, if you want to find out which steps are implemented throughout this project, check [this](./docs/plan.md)

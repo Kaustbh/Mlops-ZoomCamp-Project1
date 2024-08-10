@@ -19,6 +19,7 @@ prefect:
 	pipenv run prefect server start
 
 run-training-pipeline:
+	@echo "Start Training"
 	pipenv run python pipeline/training_pipeline.py
 
 monitoring:
@@ -27,7 +28,6 @@ monitoring:
 	@echo "Open a new terminal and run"
 	@echo "cd monitoring"
 	@echo "python evidently_metrics_calculations.py"
-
 
 deployment:
 	@echo "Creating docker container for model deployment (as web service)"
@@ -40,7 +40,17 @@ deployment:
 	@echo "To stop all running docker containers run"
 	@echo "docker stop $(docker ps -a -q)"
 
+run-unit-test:
+	pipenv run pytest test/
+
 quality-check:
 	pipenv run isort .
 	pipenv run black .
 	pipenv run pylint --recursive=y .
+
+install-hooks:
+	pipenv install pre-commit
+	pre-commit install
+
+stop-all-services:
+	docker compose down 
