@@ -28,4 +28,4 @@
 
 - ![completed](https://via.placeholder.com/15/00ff00/000000?text=+) Pre-commit hooks
 
-- ![completed](https://via.placeholder.com/15/00ff00/000000?text=+) CI/CD pipeline (unit test, integration test, linting and formatting included)
+- ![completed](https://via.placeholder.com/15/00ff00/000000?text=+) CI/CD pipeline (unit test, linting and formatting included)
