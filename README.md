@@ -30,6 +30,11 @@ The main focus of the project is to apply the MLops principles like **experiment
 
 This model tries to predict the Crab Age (column "Age") for this data set.
 
+## Contact for questions
+
+- **Name** - Kaustubh Desale
+- **Email** - desalekaustubh3@gmail.com
+
 ## ![completed](https://via.placeholder.com/15/00ff00/000000?text=+) The Entire Project can be run using the Makefile
 
 
